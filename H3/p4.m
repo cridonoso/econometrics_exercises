@@ -1,17 +1,20 @@
 clearvars
 clc
 %% Question 4 
-addpath("utils") % add utils functions
+addpath("utils")  % add utils functions
 
 J = 40;           % number of groups
 n = 10;           % individuals per group
 rho = 0.05;       % ICC
-sigma2_e = 1;     % individual variance (idiosincratica)
+sigma2_e = 1;     % individual variance (idiosincratica) [CHECK!!!!!]
 P = 0.5;          % treatment portion 
 B = 1000;         % number of simulations
 effect_sizes = [0.3, 0.4];  % true effects
 alpha = 0.05;     % significance level
 sigma2_u = rho/(1 - rho); % group variance
+
+df = J*n - 2; % 2 regressors
+t_crit = tinv(1 - alpha/2, df); %critic value 
 
 %% MonteCarlo Simulation
 rng(42); % set seed to reproduce the same charts 
@@ -25,6 +28,7 @@ for e = 1:length(effect_sizes)
     for b=1:B
         rng(seeds(b));  % reset interno
         % Data generation process
+        %[CHECK RHO!!!!!]
         [X, Y] = gdprocess(P, J, n, sigma2_e, sigma2_u, tau);
         
         % Linear regression
@@ -37,7 +41,7 @@ for e = 1:length(effect_sizes)
         % t stat 
         t_stat = beta_hat(2) / se_b;
          % bilateral rejection
-        if abs(t_stat) > norminv(1 - alpha / 2)
+        if abs(t_stat) > t_crit
             rejections = rejections + 1;
         end
     end

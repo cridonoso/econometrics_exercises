@@ -5,18 +5,18 @@ addpath("utils") % add utils functions
 
 B = 1000;             % Num of simulations
 J = 4;                % Num of clusters
-n_g = 784;            % Individuals per group
+n_g = 19236;          % Individuals per group
 N = J * n_g;          % Total pop. size
 rho = 0.05;           % intra-cluster correlation
 sigma2 = 1;           % total variance
 P = 0.5;              % treatment fraction
 alpha = 0.05;         % significance
 beta_true = 0.1;      % true effect
-%z_crit = norminv(1 - alpha/2);  % critic value 
+
 df = J - 2; % 2 regressors
 t_crit = tinv(1 - alpha/2, df); %critic value 
 
-sigma2_u = rho*sigma2;         % individual variance
+sigma2_u = rho*sigma2;        % individual variance
 sigma2_e = (1 - rho)*sigma2;  % using Var(e) = 1
 %% Monte carlo 
 rng(42); % set seed to reproduce the same charts 
