@@ -1,4 +1,3 @@
-
 function [X, Y] = gdprocess(P, J, n_g, sigma2_e, sigma2_u, tau)
 % Generative data process
 % P = treatment portion 

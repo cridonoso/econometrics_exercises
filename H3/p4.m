@@ -3,48 +3,27 @@ clc
 %% Question 4 
 addpath("utils")  % add utils functions
 
-J = 40;           % number of groups
-n = 10;           % individuals per group
-rho = 0.05;       % ICC
-sigma2_e = 1;     % individual variance (idiosincratica) [CHECK!!!!!]
-P = 0.5;          % treatment portion 
 B = 1000;         % number of simulations
+G = 40;           % number of groups
+n_g = 10;         % individuals per group
+rho = 0.05;       % ICC
+sigma2 = 1;       % total variance
+P = 0.5;          % treatment portion 
 effect_sizes = [0.3, 0.4];  % true effects
 alpha = 0.05;     % significance level
-sigma2_u = rho/(1 - rho); % group variance
 
-df = J*n - 2; % 2 regressors
+df = G*n_g - 2; % 2 regressors
 t_crit = tinv(1 - alpha/2, df); %critic value 
 
-%% MonteCarlo Simulation
-rng(42); % set seed to reproduce the same charts 
-seeds = randi(1e6, B, 1); % set seed for each simulation
+sigma2_u = rho*sigma2;        % individual variance
+sigma2_e = (1 - rho)*sigma2;  % using Var(e) = 1
 
-powers = zeros(size(effect_sizes));
+
 for e = 1:length(effect_sizes)
-    tau = effect_sizes(e);  % true effect
+    beta = effect_sizes(e);  % true effect
     rejections = 0;
     
-    for b=1:B
-        rng(seeds(b));  % reset interno
-        % Data generation process
-        %[CHECK RHO!!!!!]
-        [X, Y] = gdprocess(P, J, n, sigma2_e, sigma2_u, tau);
-        
-        % Linear regression
-        beta_hat = (X' * X) \ (X' * Y);
-        residuals = Y - X * beta_hat;
-    
-        % standar error per cluster  
-        se_b = standard_error(X, residuals, n, J);
-        
-        % t stat 
-        t_stat = beta_hat(2) / se_b;
-         % bilateral rejection
-        if abs(t_stat) > t_crit
-            rejections = rejections + 1;
-        end
-    end
-    powers(e) = rejections / B;
-    fprintf('Efecto = %.1f → Poder estimado: %.1f%%\n', tau, 100 * powers(e));
+    [power, nrej] = run_mc(B, P, G, n_g, sigma2_e, sigma2_u, beta, alpha);
+
+    fprintf('Efecto = %.1f → Poder estimado: %.1f%%\n', beta, 100*power);
 end
