@@ -3,7 +3,7 @@ function var_hat = white_hc_se(residuals, X, R)
     
     N = size(X, 1); % number of samples
     K = size(X, 2); % number of parameters
-    
+
     s2 = residuals'*residuals./(N-K); % residual variance
 
     % Check if R is provided
