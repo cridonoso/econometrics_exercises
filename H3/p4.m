@@ -1,6 +1,5 @@
 clearvars
 clc
-%% Question 4 
 addpath("utils")  % add utils functions
 
 B = 1000;         % number of simulations

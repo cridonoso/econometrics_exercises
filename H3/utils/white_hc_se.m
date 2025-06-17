@@ -1,5 +1,5 @@
 function var_hat = white_hc_se(residuals, X, R)
-    %   Calculates estimated variance
+    %  Calculates estimated variance no cluster assumption
     
     N = size(X, 1); % number of samples
     K = size(X, 2); % number of parameters
