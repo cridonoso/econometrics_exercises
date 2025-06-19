@@ -29,6 +29,7 @@ output_struct.X_labels = [X_labels, ind_labels, ctr_labels];
 output_struct.Z = Z;
 output_struct.Z_labels = Z_labels;
 config.vars.instrumental = Z_labels;
+output_struct.id = table.id;
 
 end
 

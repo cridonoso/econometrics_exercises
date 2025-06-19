@@ -1,0 +1,13 @@
+{
+  "model_type": "within",
+  "vars":{
+    "dependent": "ingresomensual",
+    "independent": ["phq_score", "edad","sexo","niveleduc","estadocivil"],
+    "instrumental":[],
+    "control":[]
+  },
+  "on_missing":"delete",
+  "path": "problema_3",
+  "robust": "true",
+  "log_y":"true"
+}

@@ -12,12 +12,7 @@ function [output, se] = ols(data, config)
     
     if strcmp(config.robust, 'true')
         fprintf('[INFO] White Kernel.\n');
-        Omega = diag(residuals.^2);
-        X_omega_X = X' * Omega * X;
-        inv_XX = inv(X' * X);
-        var_cov_matrix_robust = (n / (n - k)) * inv_XX * X_omega_X * inv_XX;
-        se = sqrt(diag(var_cov_matrix_robust));
-        
+        [vcov, se] = white_se(X, residuals);        
     else
         fprintf('[INFO] Classical OLS.\n');
         sigma2 = (residuals' * residuals) / (n - k);
