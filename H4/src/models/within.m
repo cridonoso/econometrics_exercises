@@ -20,7 +20,7 @@ function [output, se] = within(data, config)
     else
         y=data.y;
     end
-    id = data.id;
+    id = data.id; % data.ola
     [n, k] = size(x);
     [unique_vals, ~, id_sequential] = unique(id);
     N = length(unique_vals);
@@ -54,8 +54,8 @@ function [output, se] = within(data, config)
     % Now that the data is demeaned, we apply the OLS formula.
     
     beta = (x_demeaned' * x_demeaned) \ (x_demeaned' * y_demeaned);
-    
-    e = y_demeaned - x_demeaned * beta;
+    beta(isnan(beta))=0;
+    e = y_demeaned - x_demeaned *  beta;
 
     % Calculate the error variance (s^2).
     if strcmp(config.robust, 'true')

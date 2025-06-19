@@ -9,7 +9,7 @@ function [output, se] = twosls(data, config)
 
     [n, k_exo] = size(X_exo);
 
-    % % --- step 1 ---
+    % --- step 1 ---
     Z = [ones(n, 1), Z_inst, X_exo];
 
     X_endo_hat = Z * (Z \ X_endo);
@@ -31,9 +31,9 @@ function [output, se] = twosls(data, config)
     else
         F_statistic_first_stage = (ESS_first_stage / df1_first_stage) / (RSS_first_stage / df2_first_stage);
     end
-    F_statistic_first_stage
+  
 
-    % % --- Etapa 2 ---
+    % --- step 2 ---
     X_2sls = [ones(n, 1), X_endo_hat, X_exo];
     data.X = X_2sls;
     data.X_labels=["intercept", config.vars.independent, config.vars.control];

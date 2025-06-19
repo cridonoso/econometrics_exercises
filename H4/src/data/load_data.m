@@ -9,7 +9,6 @@ if config.on_missing == "delete"
     table = table(rowstokeep, :);
 end
 
-
 y = table.(config.vars.dependent); % dependent var
 output_struct.y = y;
 

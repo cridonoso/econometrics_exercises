@@ -4,11 +4,12 @@ function output = probit(data, config)
         'MaxIter', 5000,      ...  % Puedes ajustar este valor
         'Display', ''     ...  % Muestra información en cada iteración
     );
-    data.X
+
     X = normalize_matrix(data.X);
     loglike = @(b) loglikelihood(b, X, data.y);
 
     initial_betas = zeros(size(X, 2), 1);
+    % check !!
     [min_betas, negLL] = fminsearch(loglike, initial_betas, options);
     fprintf('Valor de la log-verosimilitud en el óptimo: %f\n', -negLL);
 
