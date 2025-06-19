@@ -1,0 +1,11 @@
+{
+  "model_type": "probit",
+  "vars":{
+    "dependent": "plaboral",
+    "independent": ["phq_score"],
+    "instrumental":[],
+    "control":[]
+  },
+  "on_missing":"delete",
+  "path": "problema_1"
+}

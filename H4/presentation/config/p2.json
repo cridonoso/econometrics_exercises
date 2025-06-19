@@ -1,0 +1,14 @@
+{
+  "model_type": "2sls",
+  "vars":{
+    "dependent": "ingresomensual",
+    "independent": ["phq_score"],
+    "instrumental":["muerte_conyugue", "muerte_familiar", "enfermedad_lesion",
+                    "matrimonio", "jubilacion"],
+    "control":["edad","sexo","niveleduc","estadocivil"]
+  },
+  "on_missing":"delete",
+  "path": "problema_2",
+  "robust": "true",
+  "log_y":"true"
+}
