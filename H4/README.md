@@ -72,11 +72,5 @@ Sigue estos pasos en orden para replicar los resultados:
     * Navega a la carpeta `presentation/` y abre el notebook `clean_data.ipynb`.
     * Ejecuta todas las celdas del notebook. Esto leerá el archivo `depresion.xlsx - Sheet1.csv` de la carpeta `data/` y generará el archivo `p1.csv` en la misma carpeta.
 
-2.  **Ejecutar el Análisis (MATLAB)**:
-    * Abre MATLAB.
-    * Establece el directorio de trabajo en la carpeta `H4/presentation/`.
-    * Ejecuta el script `p1.m` para realizar las estimaciones de la pregunta 1
-    * Ejecuta el script `p2.m` para realizar las estimaciones de la pregunta 2
-
 
 ---
