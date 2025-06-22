@@ -10,5 +10,8 @@
   "on_missing":"delete",
   "path": "problema_2",
   "robust": "true",
-  "log_y":"true"
+  "log_y":"true",
+  "normalize_x":"true",
+  "normalize_z":"true",
+  "debug":"false"
 }

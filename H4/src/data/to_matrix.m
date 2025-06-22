@@ -2,10 +2,15 @@ function [X, X_labels] = to_matrix(vars, table)
     X = [];
     X_labels = string([]);  
     for index = 1:length(vars)
-        current_column = table.(vars{index});
+        current_var_name = vars{index};
+        current_column = table.(current_var_name);
 
         if iscellstr(current_column) || isstring(current_column)
-            cat_col = categorical(table.(vars{index}));
+            % Create a new category for categorical variables.
+            missing_idx = ismissing(current_column);
+            current_column(missing_idx) = {'NoData'};
+
+            cat_col = categorical(current_column);
             categories_list = categories(cat_col);
             % 2 categories
             if length(categories_list) == 2
@@ -23,10 +28,26 @@ function [X, X_labels] = to_matrix(vars, table)
             end
         end
         if isnumeric(current_column)
-            X = [X, table.(vars{index})];
-            X_labels = [X_labels, vars{index}];
+            missing_idx = (current_column == -99);
+            if any(missing_idx)
+                missing_flag = double(missing_idx);
+                X = [X, missing_flag];
+                X_labels = [X_labels, strcat(current_var_name, '_missing')];
+                imputed_column = current_column;          
+                temp_column_for_mean = imputed_column;
+                temp_column_for_mean(missing_idx) = NaN; 
+                mean_val = mean(temp_column_for_mean, 'omitnan');
+                
+                % Ahora sí, reemplazamos los -99 en nuestra columna de trabajo por la media correcta.
+                imputed_column(missing_idx) = mean_val;
+                
+                X = [X, imputed_column];
+                X_labels = [X_labels, current_var_name];
+            else
+                X = [X, current_column];
+                X_labels = [X_labels, current_var_name];
+            end
         end
-
     end
-    X(isnan(X)) = -99;
+
 end

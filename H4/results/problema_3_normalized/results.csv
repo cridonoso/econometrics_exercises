@@ -1,0 +1,21 @@
+Predictor,Beta_Estimado,se
+"phq_score",0.0165920199660488,0.0174098219221764
+"edad",0.748535585908411,0.0218419164852625
+"sexo_Mujer",-0.136705814780606,0.0183613622781839
+"niveleduc_Educacion Basica o Preparatoria incompleta",-0.00604921373877521,0.0153793123262335
+"niveleduc_Educacion Media o Humanidades completa",-0.0141137521601091,0.0138567386240738
+"niveleduc_Educacion Media o Humanidades incompleta",0.000602434902214878,0.00795383484315572
+"niveleduc_Estudios de posgrado (magister o doctorado)",0.06077493668702,0.00479786479448441
+"niveleduc_Sin estudios",-0.0138721520402847,0.0632724381533146
+"niveleduc_Tecnica Superior completa",0.0191855512687898,0.0230460424131454
+"niveleduc_Tecnica Superior incompleta",-0.198015093193885,0.0382828385012789
+"niveleduc_Universitaria completa",0.0781433088211666,0.0201701350980834
+"niveleduc_Universitaria incompleta",-0.161865666816134,0.0277437083921779
+"estadocivil_Casado legalmente",-0.0977625309844149,0.0350325351396212
+"estadocivil_Conviviente con Acuerdo de Union Civil",-0.00381523152479829,0.00505942614004126
+"estadocivil_Conviviente sin Acuerdo de Union Civil",0.0827634390283769,0.0290469438427753
+"estadocivil_Divorciado",0.077661674360602,0.0195519261026181
+"estadocivil_Otro. Especifique",0.00655335649955708,0.00395014591460781
+"estadocivil_Separado (casado legalmente, pero no vive con su esposo/a)",-0.0694986022486866,0.0234898590316962
+"estadocivil_Soltero",0.049675343382914,0.03605853778948
+"estadocivil_Viudo",-0.112238653613917,0.0191513707927465

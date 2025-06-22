@@ -52,9 +52,6 @@ function [X_normalized, X_means, X_stds] = normalize_matrix(X_input)
         if col_std > 1e-10 % Use a small tolerance for comparison with zero
             X_normalized(:, j) = (current_column_data - col_mean) / col_std;
         else
-            % If the column is constant (std is zero), it's not normalized.
-            % It's left as is (or could optionally be filled with zeros,
-            % depending on context; typically left as is to maintain its "presence").
             warning('Column %d is constant (zero standard deviation). Not normalized.', j);
             X_normalized(:, j) = current_column_data; % Leave constant column as is
             X_means(j) = col_mean; % Store its mean

@@ -6,11 +6,11 @@
     "instrumental":[],
     "control":[]
   },
-  "on_missing":"delete",
-  "path": "problema_3",
+  "on_missing":"preserve_x",
+  "path": "problema_3_with_nan_normalized",
   "robust": "true",
   "log_y":"true",
-  "normalize_x":"false",
+  "normalize_x":"true",
   "normalize_z":"false",
   "debug":"false"
 }

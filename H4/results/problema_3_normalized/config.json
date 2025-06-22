@@ -1,0 +1,37 @@
+{
+  "model_type": "within",
+  "vars": {
+    "dependent": "ingresomensual",
+    "independent": [
+      "phq_score",
+      "edad",
+      "sexo_Mujer",
+      "niveleduc_Educacion Basica o Preparatoria incompleta",
+      "niveleduc_Educacion Media o Humanidades completa",
+      "niveleduc_Educacion Media o Humanidades incompleta",
+      "niveleduc_Estudios de posgrado (magister o doctorado)",
+      "niveleduc_Sin estudios",
+      "niveleduc_Tecnica Superior completa",
+      "niveleduc_Tecnica Superior incompleta",
+      "niveleduc_Universitaria completa",
+      "niveleduc_Universitaria incompleta",
+      "estadocivil_Casado legalmente",
+      "estadocivil_Conviviente con Acuerdo de Union Civil",
+      "estadocivil_Conviviente sin Acuerdo de Union Civil",
+      "estadocivil_Divorciado",
+      "estadocivil_Otro. Especifique",
+      "estadocivil_Separado (casado legalmente, pero no vive con su esposo/a)",
+      "estadocivil_Soltero",
+      "estadocivil_Viudo"
+    ],
+    "instrumental": [],
+    "control": []
+  },
+  "on_missing": "delete",
+  "path": "problema_3_normalized",
+  "robust": "true",
+  "log_y": "true",
+  "normalize_x": "true",
+  "normalize_z": "false",
+  "debug": "false"
+}

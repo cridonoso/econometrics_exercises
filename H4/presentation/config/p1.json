@@ -7,5 +7,10 @@
     "control":[]
   },
   "on_missing":"delete",
-  "path": "problema_1"
+  "path": "problema_1",
+  "log_y":"false",
+  "normalize_x":"false",
+  "normalize_z":"false",
+  "debug":"false",
+  "optimization": "newton"
 }

@@ -2,12 +2,12 @@
   "model_type": "within",
   "vars":{
     "dependent": "ingresomensual",
-    "independent": ["phq_score", "edad", "sexo", "niveleduc","estadocivil"],
+    "independent": ["phq_score", "edad","sexo", "niveleduc","estadocivil"],
     "instrumental":[],
     "control":[]
   },
-  "on_missing":"delete",
-  "path": "problema_3",
+  "on_missing":"preserve_x",
+  "path": "problema_3_with_nan",
   "robust": "true",
   "log_y":"true",
   "normalize_x":"false",

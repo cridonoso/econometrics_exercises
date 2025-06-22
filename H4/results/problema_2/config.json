@@ -1,0 +1,50 @@
+{
+  "model_type": "2sls",
+  "vars": {
+    "dependent": "ingresomensual",
+    "independent": "phq_score",
+    "instrumental": [
+      "muerte_conyugue_missing",
+      "muerte_conyugue",
+      "muerte_familiar_missing",
+      "muerte_familiar",
+      "enfermedad_lesion_No Responde",
+      "enfermedad_lesion_No Sabe",
+      "enfermedad_lesion_Si",
+      "matrimonio_No Responde",
+      "matrimonio_No Sabe",
+      "matrimonio_Si",
+      "jubilacion_No Responde",
+      "jubilacion_No Sabe",
+      "jubilacion_Si"
+    ],
+    "control": [
+      "edad",
+      "sexo_Mujer",
+      "niveleduc_Educacion Basica o Preparatoria incompleta",
+      "niveleduc_Educacion Media o Humanidades completa",
+      "niveleduc_Educacion Media o Humanidades incompleta",
+      "niveleduc_Estudios de posgrado (magister o doctorado)",
+      "niveleduc_Sin estudios",
+      "niveleduc_Tecnica Superior completa",
+      "niveleduc_Tecnica Superior incompleta",
+      "niveleduc_Universitaria completa",
+      "niveleduc_Universitaria incompleta",
+      "estadocivil_Casado legalmente",
+      "estadocivil_Conviviente con Acuerdo de Union Civil",
+      "estadocivil_Conviviente sin Acuerdo de Union Civil",
+      "estadocivil_Divorciado",
+      "estadocivil_Otro. Especifique",
+      "estadocivil_Separado (casado legalmente, pero no vive con su esposo/a)",
+      "estadocivil_Soltero",
+      "estadocivil_Viudo"
+    ]
+  },
+  "on_missing": "delete",
+  "path": "problema_2",
+  "robust": "true",
+  "log_y": "true",
+  "normalize_x": "true",
+  "normalize_z": "true",
+  "debug": "false"
+}
