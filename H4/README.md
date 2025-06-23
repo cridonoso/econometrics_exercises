@@ -1,52 +1,66 @@
-# Homework 4 
+# Econometrics Homework
 
-## Estructura del Proyecto
+## Overview
 
-El proyecto está organizado en las siguientes carpetas:
+This repository contains the MATLAB code, data, and results for a homework assignment in an Econometrics course. The project focuses on the implementation and application of several core econometric models to analyze a dataset related to depression.
 
--   `data/`: Contiene los conjuntos de datos utilizados en los análisis.
-    -   `depresion_clean.csv`: Ejemplo de datos limpios.
-    -   `depresion.xlsx - Sheet1.csv`: Datos originales.
--   `src/`: Contiene el código fuente de las funciones principales.
-    -   `src/data/`: Funciones para el procesamiento y manipulación de datos.
-        -   `gather_matrix.m`: Función para recolectar variables en una matriz.
-        -   `load_data.m`: Función para cargar datos.
-        -   `load_json.m`: Función para cargar archivos JSON de configuración.
-        -   `normalize_matrix.m`: Función para normalizar matrices.
-        -   `to_matrix.m`: Función para convertir datos a formato de matriz.
-    -   `src/models/`: Implementaciones de modelos econométricos.
-        -   `ols.m`: Implementación de Mínimos Cuadrados Ordinarios (OLS).
-        -   `twosls.m`: Implementación de Mínimos Cuadrados en Dos Etapas (2SLS).
-        -   `loglikelihood.m`: Contiene funciones relacionadas con la verosimilitud.
-        -   `probit.m`: Contiene una implementación del modelo Probit).
--   `presentation/`: Contiene scripts de ejemplo o para ejecutar análisis específicos.
-    -   `main.m`: Probablemente el script principal para ejecutar los modelos.
-    -   `p2.m`: Otro script de análisis.
-    -   `config/`: Archivos de configuración para los análisis.
-        -   `p1.json`: Configuración para `main.m`.
-        -   `p2.json`: Configuración para `p2.m`.
-    -   `clean_data.ipynb`: Un notebook de Jupyter para la limpieza de datos.
--   `enunciado.pdf`: Documento con la descripción del problema.
+The key models implemented are:
+* Ordinary Least Squares (OLS)
+* Probit
+* Fixed Effects (Within-Estimator)
+* Two-Stage Least Squares (2SLS)
 
-## Requisitos
+## Folder Structure
 
--   MATLAB (versión R2018a o superior recomendada).
+The repository is organized as follows:
 
-## Cómo Usar
+* **/data**: Contains the raw and cleaned datasets in `.csv` format.
+* **/presentation**: The main entry point for the project.
+    * `main.m`: The main script to run all analyses.
+    * `/config`: JSON files that configure the parameters for each model estimation.
+    * `clean_data.ipynb` & `results.ipynb`: Jupyter Notebooks for data preparation and results visualization.
 
-1.  **Clonar el Repositorio:**
-    ```bash
-    git clone [https://github.com/TuUsuario/NombreDeTuRepositorio.git](https://github.com/TuUsuario/NombreDeTuRepositorio.git)
-    cd NombreDeTuRepositorio
-    ```
-2.  **Abrir en MATLAB:** Abre la carpeta principal del proyecto (`NombreDeTuRepositorio`) en MATLAB.
-3.  **Configuración de Rutas:** Asegúrate de que las subcarpetas `src/models/` y `src/data/` estén en la ruta de MATLAB. Puedes hacerlo con `addpath('src/models')` y `addpath('src/data')` desde la carpeta raíz del proyecto, o añadiéndolas permanentemente desde el entorno de MATLAB.
-4.  **Ejecutar Análisis:**
-    * Para ejecutar el análisis principal, puedes usar el script `main.m` ubicado en la carpeta `presentation/`.
-        ```matlab
-        run('presentation/main.m');
-        ```
-    * Revisa los archivos `.json` en `presentation/config/` para entender las configuraciones de las variables y modelos.
+* **/results**: The default output directory where all results (tables and figures) are saved.
+* **/src**: All MATLAB source code, divided into subdirectories:
+    * `/data`: Functions for data loading, cleaning, creating dummy variables, and preprocessing (`load_data.m`, `to_matrix.m`).
+    * `/models`: The core implementation of each econometric model (`ols.m`, `probit.m`, `within.m`, `twosls.m`).
+    * `/arnd`: An included third-party toolbox (**DERIVEST** by John D'Errico) used for numerical differentiation to calculate gradients and Hessians.
 
+## How to Run the Analysis
 
+1.  Open the project folder in MATLAB.
+2.  Navigate to and open the **`presentation/main.m`** script.
+3.  The script is divided into sections corresponding to each problem in the assignment.
+4.  To run a specific analysis, ensure the path to the desired configuration file (from `presentation/config/`) is set correctly within the corresponding section.
+    - p1.json stands for problem 1 according to `enunciado.pdf` 
+    - p2.json stands for problem 2 according to `enunciado.pdf` 
+    - p3.json stands for problem 3 according to `enunciado.pdf` 
+5.  Run the section of interest. Results will be automatically saved to the `/results` directory.
 
+# How to Use the Jupyter Notebooks
+
+The `/presentation` folder contains two Jupyter Notebooks that require a Python environment.
+
+* **`clean_data.ipynb`**
+    * **Purpose**: This notebook performs the initial cleaning of the raw dataset (`depresion.xlsx - Sheet1.csv`) and generates the `depresion_clean.csv` file used by the MATLAB scripts.
+    * **When to run**: It should be run once before any MATLAB analysis to ensure the clean data file is available.
+
+* **`results.ipynb`**
+    * **Purpose**: This notebook is used to load, visualize, and analyze the `.csv` results generated by the MATLAB scripts.
+    * **When to run**: It should be run *after* executing the `presentation/main.m` script, as it reads the output files from the `/results` directory.
+
+## Dependencies
+
+### MATLAB
+* Requires MATLAB to run the main analysis scripts.
+* The numerical differentiation toolbox is included in `/src/arnd` and requires no separate installation.
+
+### Python
+* Requires a Python installation with Jupyter Notebook/JupyterLab to run the `.ipynb` files.
+* Required libraries: `pandas`, `numpy`, `matplotlib`, `seaborn`.
+
+## Group Members
+
+* *Cristóbal Donoso*
+* *Sebastian Rivera*
+* *Antonino Ávila*

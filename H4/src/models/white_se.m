@@ -1,39 +1,38 @@
 function [vcov_robust, se_robust] = white_se(X, e)
-    % ROBUST_SE Calculates heteroskedasticity-robust standard errors (HC1).
-    %
-    %   [vcov_robust, se_robust] = robust_se(X, e)
-    %
-    %   Inputs:
-    %     X: Matrix of regressors (independent variables) from the model (n x k).
-    %     e: Vector of residuals from the estimated model (n x 1).
-    %
-    %   Outputs:
-    %     vcov_robust: The robust variance-covariance matrix (k x k).
-    %     se_robust:   The vector of robust standard errors (k x 1).
+%WHITE_SE Calculates White's heteroskedasticity-robust standard errors.
+%
+%   This function computes the robust variance-covariance matrix using the
+%   "sandwich" estimator, applying the HC1 finite-sample correction factor
+%   of n/(n-k).
+%
+%   Inputs:
+%       X           - A (n x k) matrix of independent variables (regressors).
+%       e           - A (n x 1) vector of residuals from the original model.
+%
+%   Outputs:
+%       vcov_robust - The (k x k) robust variance-covariance matrix (HC1).
+%       se_robust   - A (k x 1) vector of robust standard errors.
 
-    %% 1. GET DIMENSIONS
+    % Get problem dimensions.
     [n, k] = size(X);
 
-    %% 2. CALCULATE THE SANDWICH COMPONENTS
-
-    % The "bread": (X'X)^-1
-    % Calculated once for efficiency.
+    %% 1. Calculate Kernel Estimator Components
+    % Calculate the similarity matrix of the estimator: (X'X)^-1
     invXX = inv(X' * X);
 
-    % The "meat": Sum(e_i^2 * x_i * x_i')
-    % Calculated using matrix algebra to avoid a slow for-loop.
-    % X' * diag(e.^2) * X is an efficient way to compute the sum.
+    % Calculate the kernel part of the estimator: Sum(e_i^2 * x_i * x_i')
+    % This is computed efficiently using matrix operations.
     S = X' * diag(e.^2) * X;
 
-    %% 3. DEGREES OF FREEDOM CORRECTION (HC1)
-    % Stata and other packages use n/(n-k) for a finite-sample correction.
+    %% 2. Apply Finite-Sample Correction (HC1)
+    % This correction is commonly used by statistical packages like Stata.
     df_correction = n / (n - k);
 
-    %% 4. ASSEMBLE THE SANDWICH
+    %% 3. Assemble the Robust Variance-Covariance Matrix
     vcov_robust = df_correction * invXX * S * invXX;
 
-    %% 5. CALCULATE STANDARD ERRORS
-    % They are the square root of the diagonal of the var-cov matrix.
+    %% 4. Extract Standard Errors
+    % Standard errors are the square root of the diagonal elements.
     se_robust = sqrt(diag(vcov_robust));
 
 end

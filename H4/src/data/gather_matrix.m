@@ -1,19 +1,22 @@
 function selected_columns_matrix = gather_matrix(matrix_input, labels_matrix_columns, labels_list_2)
-    % SELECT_COLUMNS_BY_COMMON_LABELS Selects columns from a matrix based on common labels.
-    %
-    %   SELECTED_COLUMNS_MATRIX = SELECT_COLUMNS_BY_COMMON_LABELS(MATRIX_INPUT, ...
-    %                                                            LABELS_MATRIX_COLUMNS, ...
-    %                                                            LABELS_LIST_2)
-    %
-    %   MATRIX_INPUT:          The numeric matrix from which to select columns.
-    %   LABELS_MATRIX_COLUMNS: A cell array or string array containing the labels
-    %                          for the columns of MATRIX_INPUT, in order.
-    %   LABELS_LIST_2:         A cell array or string array containing a second
-    %                          list of labels to intersect with LABELS_MATRIX_COLUMNS.
-    %
-    %   SELECTED_COLUMNS_MATRIX: The new matrix containing only the columns
-    %                            whose labels are common to both input lists.
+%GATHER_MATRIX Selects matrix columns based on a list of labels.
+%
+%   This function extracts columns from a source matrix by finding the
+%   common labels between the matrix's column labels and a separate list of
+%   desired labels.
+%
+%   Inputs:
+%       matrix_input          - The source numerical matrix.
+%       labels_matrix_columns - A string or cell array with labels for the
+%                               columns of 'matrix_input'.
+%       labels_list_2         - A string or cell array with the labels of
+%                               the columns to be selected.
+%
+%   Output:
+%       selected_columns_matrix - A new matrix containing only the selected
+%                                 columns from 'matrix_input'.
 
+    % Ensure both label inputs are string arrays for reliable comparison.
     if iscellstr(labels_matrix_columns)
         labels_matrix_columns = string(labels_matrix_columns);
     end
@@ -21,18 +24,22 @@ function selected_columns_matrix = gather_matrix(matrix_input, labels_matrix_col
         labels_list_2 = string(labels_list_2);
     end
 
+    % Find the set of labels that are present in both lists.
     common_labels = intersect(labels_matrix_columns, labels_list_2);
 
-    % If no common labels, return an empty matrix
+    % If no common labels are found, return an empty matrix and warn the user.
     if isempty(common_labels)
         selected_columns_matrix = [];
         warning('No common labels found between the two lists. Returning empty matrix.');
         return;
     end
 
+    % Get the indices of the common labels in the original matrix's label list.
     [~, col_indices_to_select] = ismember(common_labels, labels_matrix_columns);
 
+    % Sanitize indices to ensure no zero-indices are passed.
     col_indices_to_select = col_indices_to_select(col_indices_to_select ~= 0);
 
+    % Select the desired columns from the input matrix to create the output.
     selected_columns_matrix = matrix_input(:, col_indices_to_select);
 end

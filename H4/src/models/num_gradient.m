@@ -1,28 +1,34 @@
 function G = num_gradient(fun, theta)
-% NUMERICAL_GRADIENT Calcula el gradiente de una función en un punto dado
-%                    usando el método de diferencias finitas centrales.
+%NUM_GRADIENT Computes the numerical gradient of a function.
 %
-% Entradas:
-%   fun:    Handle a la función a diferenciar.
-%   theta:  Vector columna del punto donde se evalúa el gradiente.
+%   This function calculates the gradient of a given function 'fun' at a
+%   specific point 'theta' using the central finite difference method.
 %
-% Salida:
-%   G:      Vector columna con el gradiente numérico.
+%   Inputs:
+%       fun     - A handle to the function to be differentiated. This
+%                 function must accept a vector and return a scalar.
+%       theta   - A column vector representing the point at which the
+%                 gradient is evaluated.
 %
-n_params = length(theta);
-G = zeros(n_params, 1); % Inicializamos el vector gradiente
-epsilon = 1e-6; % Un paso pequeño para la diferenciación
-for j = 1:n_params
-    % Creamos los vectores para el paso "hacia adelante" y "hacia atrás"
-    theta_plus = theta;
-    theta_minus = theta;
-    
-    % Movemos únicamente el j-ésimo parámetro
-    theta_plus(j) = theta(j) + epsilon;
-    theta_minus(j) = theta(j) - epsilon;
-    
-    % Calculamos la derivada parcial para el j-ésimo parámetro
-    G(j) = (fun(theta_plus) - fun(theta_minus)) / (2 * epsilon);
-end
+%   Output:
+%       G       - A column vector containing the numerical gradient.
+
+    n_params = length(theta);
+    G = zeros(n_params, 1); % Initialize the gradient vector.
+    epsilon = 1e-6;         % Define a small step size for differentiation.
+
+    % Iterate over each parameter to compute its partial derivative.
+    for j = 1:n_params
+        % Create vectors for the forward and backward steps.
+        theta_plus = theta;
+        theta_minus = theta;
+
+        % Perturb only the j-th parameter.
+        theta_plus(j) = theta(j) + epsilon;
+        theta_minus(j) = theta(j) - epsilon;
+
+        % Compute the partial derivative using the central difference formula.
+        G(j) = (fun(theta_plus) - fun(theta_minus)) / (2 * epsilon);
+    end
 
 end

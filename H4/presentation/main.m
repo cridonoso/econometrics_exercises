@@ -8,10 +8,14 @@ addpath('src/data')   % load functions
 addpath('src/models') % load functions
 addpath('src/arnd')   % load functions
 
-config_file = './presentation/config/p1.json'; % problem specific configuration
+config_file = './presentation/config/p3.json'; % problem specific configuration
 
 config = load_json(config_file);
 proyect_path = "./results/" + config.path;
+if ~isfolder(proyect_path)
+    fprintf('Directorio no encontrado. Creando ruta: %s\n', proyect_path);
+    mkdir(proyect_path);
+end
 
 % Loading the data
 [data, config] = load_data('./data/depresion_clean.csv', config);
